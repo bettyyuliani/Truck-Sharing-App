@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="truckImage">
+        <item>@drawable/small_truck</item>
+        <item>@drawable/construction_truck</item>
+        <item>@drawable/vintage_truck</item>
+        <item>@drawable/goods_truck</item>
+    </array>
+    <array name="truckName">
+        <item>Small Truck</item>
+        <item>Construction Truck</item>
+        <item>Vintage Truck</item>
+        <item>Goods Truck</item>
+    </array>
+    <array name="truckDescription">
+        <item>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin viverra justo dolor, et vehicula odio sollicitudin ut. Vivamus sagittis tempus hendrerit. Nullam libero tortor, rhoncus.</item>
+        <item>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis placerat tempus purus. Sed placerat eget sapien eget euismod. Praesent id felis ut tellus egestas luctus.</item>
+        <item>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer malesuada mi quis mi consectetur, at aliquet arcu sollicitudin. Proin nunc magna, hendrerit ac libero id, accumsan dictum est. Nullam non.</item>
+        <item>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas turpis dolor, varius ac ipsum vel, tristique imperdiet nulla. Vestibulum suscipit enim quis porta dapibus. Aliquam eu laoreet libero.</item>
+    </array>
+</resources>

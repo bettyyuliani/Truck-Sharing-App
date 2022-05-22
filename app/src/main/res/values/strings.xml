@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Task 10.1</string>
+    <string name="title_activity_delivery">DeliveryActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string-array name="good_types">
+        <item>Furniture</item>
+        <item>Dry Goods</item>
+        <item>Food</item>
+        <item>Building Material</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="vehicle_types">
+        <item>Truck</item>
+        <item>Van</item>
+        <item>Refrigerated Truck</item>
+        <item>Mini Truck</item>
+        <item>Other</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maps">MapsActivity</string>
+
+</resources>

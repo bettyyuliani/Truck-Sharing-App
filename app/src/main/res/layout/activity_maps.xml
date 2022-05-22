@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="450sp"
+        android:layout_below="@id/destinationContainer"
+        tools:context=".MapsActivity" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/distanceContainer"
+        android:layout_width="match_parent"
+        android:layout_height="45sp"
+        android:layout_below="@id/fareContainer"
+        android:layout_marginLeft="0.5sp"
+        android:layout_marginRight="0.5sp"
+        android:layout_marginBottom="1sp"
+        android:background="@drawable/shape">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Approx. Time:"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/timeMapTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="TextView"
+                android:textSize="20sp"
+                map:layout_constraintStart_toEndOf="@+id/textView18"
+                tools:layout_editor_absoluteY="0dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fareContainer"
+        android:layout_width="match_parent"
+        android:layout_height="45sp"
+        android:layout_below="@id/map"
+        android:layout_marginLeft="0.5sp"
+        android:layout_marginRight="0.5sp"
+        android:layout_marginBottom="1sp"
+        android:background="@drawable/shape">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Approx. Fare:"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/fareMapTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="TextView"
+                android:textSize="20sp"
+                map:layout_constraintStart_toEndOf="@+id/textView17"
+                tools:layout_editor_absoluteY="0dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/originContainer"
+        android:layout_width="match_parent"
+        android:layout_height="45sp"
+        android:layout_marginLeft="0.5sp"
+        android:layout_marginTop="0.5sp"
+        android:layout_marginRight="0.5sp"
+        android:background="@drawable/shape">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pick Up Location: "
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/originMapTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="TextView"
+                android:textSize="20sp"
+                map:layout_constraintStart_toEndOf="@+id/textView14"
+                tools:layout_editor_absoluteY="0dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--    <fragment-->
+<!--        android:id="@+id/map"-->
+<!--        android:name="com.google.android.gms.maps.MapFragment"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="100dp" />-->
+    <!-- here remaining layout-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/destinationContainer"
+        android:layout_width="match_parent"
+        android:layout_height="45sp"
+        android:layout_below="@id/originContainer"
+        android:layout_marginLeft="0.5sp"
+        android:layout_marginRight="0.5sp"
+        android:layout_marginBottom="1sp"
+        android:background="@drawable/shape">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Drop Off Location: "
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/destinationMapTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="TextView"
+                android:textSize="20sp"
+                map:layout_constraintStart_toEndOf="@+id/textView13"
+                tools:layout_editor_absoluteY="0dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/bookButton"
+        android:layout_width="230sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/distanceContainer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10sp"
+        android:backgroundTint="#C5C5C5"
+        android:text="Book Now"
+        android:textColor="#000000"
+        map:strokeColor="#4A4A4A"
+        map:strokeWidth="7px" />
+
+    <Button
+        android:id="@+id/callButton"
+        android:layout_width="230sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bookButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10sp"
+        android:backgroundTint="#FFC5C5C5"
+        android:text="Call Driver"
+        android:textColor="#000000" />
+
+
+</RelativeLayout>
+<!--<fragment xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:map="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:id="@+id/map"-->
+<!--    android:name="com.google.android.gms.maps.SupportMapFragment"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".MapsActivity" />-->
