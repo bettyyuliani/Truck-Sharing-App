@@ -1,4 +1,4 @@
-package com.example.task101;
+package com.example.task101.util;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,7 +12,7 @@ public class Util {
    public static final int PICK_LOCATION_REQUEST = 200;
     public static final int PICK_DESTINATION_REQUEST = 300;
     // api key
-    public static final String API_KEY = "AIzaSyBxLhE1q3SQz4aml5ElWZWQb6eDrVFZPqs";
+    public static final String API_KEY = "AIzaSyDg3rrIKggl9CmPicsSMJGlX-814PSsdg8";
     public static final String LOCATION_LATITUDE = "location_latitude";
     public static final String LOCATION_LONGITUDE = "location_longitude";
     public static final String DESTINATION_LATITUDE = "destination_latitude";

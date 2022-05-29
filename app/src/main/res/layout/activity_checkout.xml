@@ -2,84 +2,71 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:backgroundTint="#FFFFFF"
-    tools:context=".OrderFragment">
+    tools:context=".CheckoutActivity">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <ImageView
-        android:id="@+id/fragmentGoodImageView"
-        android:layout_width="130dp"
-        android:layout_height="129dp"
-        android:layout_marginTop="16dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
-
 
     <TextView
-        android:id="@+id/fragmentReceiverTextView"
+        android:id="@+id/checkoutReceiverTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="34dp"
         android:text="RECEIVER"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentGoodImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <TextView
-        android:id="@+id/dateFragmentTV"
+        android:id="@+id/dateCheckoutTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="160dp"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/fragmentDateTextView"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentGoodImageView" />
+        app:layout_constraintStart_toEndOf="@+id/checkoutDateTextView"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/receiverFragmentTV"
+        android:id="@+id/receiverCheckoutTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="96dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="122dp"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/fragmentReceiverTextView"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentGoodImageView" />
+        app:layout_constraintStart_toEndOf="@+id/checkoutReceiverTextView"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/timeFragmentTV"
+        android:id="@+id/timeCheckoutTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="140dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="125dp"
         android:text="tes"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/fragmentTimeTextView"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentGoodImageView" />
+        app:layout_constraintStart_toEndOf="@+id/checkoutTimeTextView"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <TextView
-        android:id="@+id/locationFragmentTV"
+        android:id="@+id/locationCheckoutTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="88dp"
-        android:layout_marginTop="144dp"
+        android:layout_marginTop="16dp"
         android:text="tes"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/fragmentLocationTextView2"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentGoodImageView" />
+        app:layout_constraintStart_toEndOf="@+id/checkoutLocationTextView2"
+        app:layout_constraintTop_toBottomOf="@+id/timeCheckoutTV" />
 
     <TextView
-        android:id="@+id/fragmentTimeTextView"
+        android:id="@+id/checkoutTimeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
@@ -88,10 +75,10 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentDateTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/checkoutDateTextView" />
 
     <TextView
-        android:id="@+id/fragmentDateTextView"
+        android:id="@+id/checkoutDateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
@@ -100,10 +87,10 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentReceiverTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/checkoutReceiverTextView" />
 
     <TextView
-        android:id="@+id/fragmentLocationTextView2"
+        android:id="@+id/checkoutLocationTextView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
@@ -112,10 +99,10 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentTimeTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/checkoutTimeTextView" />
 
     <TextView
-        android:id="@+id/fragmentLocationTextView"
+        android:id="@+id/checkoutLocationTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
@@ -124,35 +111,34 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentLocationTextView2" />
+        app:layout_constraintTop_toBottomOf="@+id/checkoutLocationTextView2" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/textView11checkout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="36dp"
         android:text="GOOD DESCRIPTION"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.472"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentLocationTextView2" />
+        app:layout_constraintTop_toBottomOf="@+id/checkoutLocationTextView" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/lengthLayout"
+        android:id="@+id/lengthLayoutCheckout"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/shape"
         android:orientation="vertical"
-        app:layout_constraintStart_toEndOf="@+id/heightLayout"
-        app:layout_constraintTop_toBottomOf="@+id/widthLayout">
+        app:layout_constraintStart_toEndOf="@+id/heightLayoutcheckout"
+        app:layout_constraintTop_toBottomOf="@+id/widthLayoutcheckout">
 
 
         <TextView
-            android:id="@+id/lengthTV"
+            android:id="@+id/lengthTVCheckout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -164,7 +150,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/lengthFragmentTV"
+            android:id="@+id/lengthCheckoutTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -173,12 +159,12 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lengthTV" />
+            app:layout_constraintTop_toBottomOf="@+id/lengthTVCheckout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/weightLayout"
+        android:id="@+id/weightLayoutCheckout"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -186,11 +172,11 @@
         android:background="@drawable/shape"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11">
+        app:layout_constraintTop_toBottomOf="@+id/textView11checkout">
 
 
         <TextView
-            android:id="@+id/weightTV"
+            android:id="@+id/weightTVcheckout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -202,7 +188,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/weightFragmentTV"
+            android:id="@+id/weightCheckoutTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -211,24 +197,24 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/weightTV" />
+            app:layout_constraintTop_toBottomOf="@+id/weightTVcheckout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/vehicleTypeLayout"
+        android:id="@+id/vehicleTypeLayoutcheckout"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/shape"
         android:orientation="vertical"
-        app:layout_constraintStart_toEndOf="@+id/goodTypeLayout"
-        app:layout_constraintTop_toBottomOf="@+id/lengthLayout">
+        app:layout_constraintStart_toEndOf="@+id/goodTypeLayoutcheckout"
+        app:layout_constraintTop_toBottomOf="@+id/lengthLayoutCheckout">
 
 
         <TextView
-            android:id="@+id/vehicleTypeTV"
+            android:id="@+id/vehicleTypeTVcheckout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -240,7 +226,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/vehicleFragmentTV"
+            android:id="@+id/vehicleCheckoutTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -249,12 +235,12 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/vehicleTypeTV" />
+            app:layout_constraintTop_toBottomOf="@+id/vehicleTypeTVcheckout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/heightLayout"
+        android:id="@+id/heightLayoutcheckout"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -262,11 +248,11 @@
         android:background="@drawable/shape"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weightLayout">
+        app:layout_constraintTop_toBottomOf="@+id/weightLayoutCheckout">
 
 
         <TextView
-            android:id="@+id/heightTV"
+            android:id="@+id/heightTVcheckout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -278,7 +264,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/heightFragmentTV"
+            android:id="@+id/heightCheckoutTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -287,24 +273,24 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/heightTV" />
+            app:layout_constraintTop_toBottomOf="@+id/heightTVcheckout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/widthLayout"
+        android:id="@+id/widthLayoutcheckout"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/shape"
         android:orientation="vertical"
-        app:layout_constraintStart_toEndOf="@+id/weightLayout"
-        app:layout_constraintTop_toBottomOf="@+id/textView11">
+        app:layout_constraintStart_toEndOf="@+id/weightLayoutCheckout"
+        app:layout_constraintTop_toBottomOf="@+id/textView11checkout">
 
 
         <TextView
-            android:id="@+id/widthTV"
+            android:id="@+id/widthTVcheckout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -316,7 +302,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/widthFragmentTV"
+            android:id="@+id/widthCheckoutTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -325,12 +311,12 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/widthTV" />
+            app:layout_constraintTop_toBottomOf="@+id/widthTVcheckout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/goodTypeLayout"
+        android:id="@+id/goodTypeLayoutcheckout"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -338,11 +324,11 @@
         android:background="@drawable/shape"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/heightLayout">
+        app:layout_constraintTop_toBottomOf="@+id/heightLayoutcheckout">
 
 
         <TextView
-            android:id="@+id/goodTypeTV"
+            android:id="@+id/goodTypeTVcheckout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -357,7 +343,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/goodTypeFragmentTV"
+            android:id="@+id/goodTypeCheckoutTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -366,31 +352,52 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/goodTypeTV" />
+            app:layout_constraintTop_toBottomOf="@+id/goodTypeTVcheckout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
-        android:id="@+id/getEstimateButton"
-        android:layout_width="183dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="5dp"
-        android:backgroundTint="#8E8E8E"
-        android:onClick="estimateClick"
-        android:text="GET ESTIMATE"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
+    <!--
+           TODO Check out Google Pay's brand guidelines to discover all button types and styles:
+           https://developers.google.com/pay/api/android/guides/brand-guidelines#assets
+       -->
     <TextView
-        android:id="@+id/destinationFragmentTV"
+        android:id="@+id/destinationCheckoutTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="184dp"
+        android:layout_marginTop="22dp"
         android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/fragmentLocationTextView"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentGoodImageView" />
+        app:layout_constraintStart_toEndOf="@+id/checkoutLocationTextView"
+        app:layout_constraintTop_toBottomOf="@+id/locationCheckoutTV" />
+
+    <include
+        android:id="@+id/googlePayButton"
+        layout="@layout/pay_with_googlepay_button"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:visibility="gone"
+        android:layout_marginTop="5dp"
+        android:text="Get Estimate"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goodTypeLayoutcheckout"
+        app:layout_constraintVertical_bias="0.309" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="CONFIRM ORDER"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

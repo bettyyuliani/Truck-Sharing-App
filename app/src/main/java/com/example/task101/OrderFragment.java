@@ -1,7 +1,6 @@
 package com.example.task101;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.example.task101.util.Util;
 
 public class OrderFragment extends Fragment {
 
@@ -93,6 +94,16 @@ public class OrderFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MapsActivity.class);
+//                intent.putExtra(Util.GOOD_IMAGE, goodImageBitmap);
+                intent.putExtra(Util.RECEIVER_NAME, receiverName);
+                intent.putExtra(Util.DATE, date);
+                intent.putExtra(Util.TIME, time);
+                intent.putExtra(Util.GOOD_TYPE, goodType);
+                intent.putExtra(Util.VEHICLE_TYPE, vehicleType);
+                intent.putExtra(Util.WEIGHT, weight);
+                intent.putExtra(Util.LENGTH, length);
+                intent.putExtra(Util.HEIGHT, height);
+                intent.putExtra(Util.WIDTH, width);
                 intent.putExtra(Util.LOCATION_LATITUDE, locationLatitude);
                 intent.putExtra(Util.LOCATION_LONGITUDE, locationLongitude);
                 intent.putExtra(Util.DESTINATION_LATITUDE, destinationLatitude);

@@ -5,18 +5,28 @@
     <meta-data
         android:name="com.google.android.gms.wallet.api.enabled"
         android:value="true" />
-    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="Truck Sharing"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Task101">
+
+        <!-- This element is required to enable Google Pay in your app. -->
+        <meta-data
+            android:name="com.google.android.gms.wallet.api.enabled"
+            android:value="true" />
+
         <activity
-            android:name=".PaymentActivity"
-            android:exported="false" />
+            android:name=".CheckoutActivity"
+            android:exported="false"
+            android:label="Confirm Order"
+            android:theme="@style/Theme.Task101" />
+
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -30,7 +40,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBxLhE1q3SQz4aml5ElWZWQb6eDrVFZPqs" />
+            android:value="${MAPS_API_KEY}" />
 
         <activity
             android:name=".MapsActivity"

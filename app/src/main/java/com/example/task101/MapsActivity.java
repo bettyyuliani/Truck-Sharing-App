@@ -1,13 +1,12 @@
 package com.example.task101;
 
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -23,6 +22,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.task101.databinding.ActivityMapsBinding;
+import com.example.task101.util.Util;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -30,11 +31,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.example.task101.databinding.ActivityMapsBinding;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.wallet.IsReadyToPayRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,14 +46,13 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     final int REQUEST_PHONE_CALL = 200;
     private double destinationLatitude, destinationLongitude;
     private double locationLatitude, locationLongitude;
-    private String location, destination, duration;
+    private String location, destination;
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
@@ -66,6 +62,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     TextView originTV, destinationTV, fareTV, timeTV;
 
+    // declare variables used inside this actvity
+    private String receiverName;
+    private String time;
+    private String date;
+    private String goodType;
+    private String vehicleType;
+    private String weight;
+    private String width;
+    private String length;
+    private String height;
+    byte[] goodImageBytesArray;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +81,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // get views
         originTV = findViewById(R.id.originMapTV);
         destinationTV = findViewById(R.id.destinationMapTV);
         fareTV = findViewById(R.id.fareMapTV);
@@ -83,6 +92,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        // get data from order fragment
         Intent intent = getIntent();
         destinationLatitude = intent.getDoubleExtra(Util.DESTINATION_LATITUDE, 0);
         destinationLongitude = intent.getDoubleExtra(Util.DESTINATION_LONGITUDE, 0);
@@ -90,10 +100,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         locationLongitude = intent.getDoubleExtra(Util.LOCATION_LONGITUDE, 0);
         location = intent.getStringExtra(Util.LOCATION);
         destination = intent.getStringExtra(Util.DESTINATION);
+        receiverName = intent.getStringExtra(Util.RECEIVER_NAME);
+        time = intent.getStringExtra(Util.TIME);
+        date = intent.getStringExtra(Util.DATE);
+        goodType = intent.getStringExtra(Util.GOOD_TYPE);
+        vehicleType = intent.getStringExtra(Util.VEHICLE_TYPE);
+        weight = intent.getStringExtra(Util.WEIGHT);
+        width = intent.getStringExtra(Util.WIDTH);
+        length = intent.getStringExtra(Util.LENGTH);
+        height = intent.getStringExtra(Util.HEIGHT);
 
+        // set text on map activities
         originTV.setText(location);
         destinationTV.setText(destination);
 
+        // get url for API
         url = getDirectionUrl(locationLatitude, locationLongitude, destinationLatitude, destinationLongitude);
 
         // create new json object request for duration
@@ -129,6 +150,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         downloadTask.execute(url);
     }
 
+    // download URL in background
     public class DownloadTask extends AsyncTask<String, Void, String> {
 
         @Override
@@ -152,6 +174,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             parserTask.execute(result);
         }
     }
+
+    // get map path
     private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap>>> {
 
         // Parsing the data in non-ui thread
@@ -172,6 +196,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return routes;
         }
 
+        // create and draw map path
         @Override
         protected void onPostExecute(List<List<HashMap>> result) {
             ArrayList points = null;
@@ -206,6 +231,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    // call API url
     private String downloadUrl(String url) throws IOException {
         String data = "";
         InputStream iStream = null;
@@ -236,25 +262,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return data;
     }
 
-    private String getDistanceUrl(double locationLatitude, double locationLongitude, double destinationLatitude, double destinationLongitude)
-    {
-        // origin of route
-        String originLatLng = "?origins=" + locationLatitude + "," + locationLongitude;
-
-        // destination of route
-        String destinationLatLng = "destinations=" + destinationLatitude + "," + destinationLongitude;
-
-        // building parameters to web service
-        String parameters = originLatLng + "&" + destinationLatLng;
-
-        // output format
-        String output = "json";
-
-        // complete url
-        return "https://maps.googleapis.com/maps/api/distancematrix" + output + parameters + "&key=" + Util.API_KEY;
-    }
-
-
+    // get http url for API
     private String getDirectionUrl(double locationLatitude, double locationLongitude, double destinationLatitude, double destinationLongitude)
     {
         // origin of route
@@ -297,11 +305,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(origin, 13));
     }
 
+    // on click listener for book
     public void bookClick(View view)
     {
-
+        Intent intent = new Intent(getApplicationContext(), CheckoutActivity.class);
+        intent.putExtra(Util.LOCATION, location);
+        intent.putExtra(Util.DESTINATION, destination);
+        intent.putExtra(Util.RECEIVER_NAME, receiverName);
+        intent.putExtra(Util.TIME, time);
+        intent.putExtra(Util.DATE, date);
+        intent.putExtra(Util.GOOD_TYPE, goodType);
+        intent.putExtra(Util.VEHICLE_TYPE, vehicleType);
+        intent.putExtra(Util.WEIGHT, weight);
+        intent.putExtra(Util.WIDTH, width);
+        intent.putExtra(Util.LENGTH, length);
+        intent.putExtra(Util.HEIGHT, height);
+        intent.putExtra(Util.GOOD_IMAGE, goodImageBytesArray);
+        startActivity(intent);
     }
 
+    // on click listener for call
     public void callClick(View view)
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
