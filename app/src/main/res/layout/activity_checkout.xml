@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:backgroundTint="#FFFFFF"
-    tools:context=".CheckoutActivity">
+    tools:context="com.example.task82.CheckoutActivity">
 
     <!-- TODO: Update blank fragment layout -->
 

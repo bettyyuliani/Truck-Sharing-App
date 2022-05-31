@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:backgroundTint="#FFFFFF"
-    tools:context=".OrderFragment">
+    tools:context="com.example.task82.OrderFragment">
 
     <!-- TODO: Update blank fragment layout -->
 

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="450sp"
         android:layout_below="@id/destinationContainer"
-        tools:context=".MapsActivity" />
+        tools:context="com.example.task82.MapsActivity" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/distanceContainer"

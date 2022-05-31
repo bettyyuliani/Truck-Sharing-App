@@ -38,5 +38,6 @@
 
     <!-- Checkout activity -->
     <string name="title_activity_checkout2">CheckoutActivity2</string>
+    <string name="autofill"><u>Fill fields with Image?</u></string>
 
 </resources>
