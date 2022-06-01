@@ -1,8 +1,11 @@
 package com.example.task82.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -11,6 +14,13 @@ public class Util {
 
    public static final int PICK_LOCATION_REQUEST = 200;
     public static final int PICK_DESTINATION_REQUEST = 300;
+
+    // messages nodes
+   public static final String MESSAGE = "message";
+   public static final String MESSAGE_ID = "message_ID";
+   public static final String MESSAGE_TIME = "message_time";
+   public static final String MESSAGE_SENDER = "message_sender";
+   public static final String MESSAGES = "messages";
     // api key
     public static final String API_KEY = "AIzaSyDg3rrIKggl9CmPicsSMJGlX-814PSsdg8";
     public static final String LOCATION_LATITUDE = "location_latitude";
@@ -82,4 +92,16 @@ public class Util {
         return bitmap;
     }
 
+ @SuppressLint("MissingPermission")
+ public  static  boolean connectionAvailable(Context context){
+  ConnectivityManager connectivityManager  = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+  if(connectivityManager !=null && connectivityManager.getActiveNetwork() !=null)
+  {
+   return  connectivityManager.getActiveNetworkInfo().isAvailable();
+  }
+  else {
+   return  false;
+  }
+ }
 }

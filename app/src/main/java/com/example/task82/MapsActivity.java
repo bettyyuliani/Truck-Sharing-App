@@ -329,14 +329,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     // on click listener for call
     public void callClick(View view)
     {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL); }
-        else
-        {
-            Intent intent = new Intent(Intent.ACTION_CALL);
-            intent.setData(Uri.parse("tel: 048423233"));
-            startActivity(intent);
-        }
+        Intent intent = new Intent(this, ChatActivity.class);
+        startActivity(intent);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+//            requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL); }
+//        else
+//        {
+//            Intent intent = new Intent(Intent.ACTION_CALL);
+//            intent.setData(Uri.parse("tel: 048423233"));
+//            startActivity(intent);
+//        }
     }
 
 }

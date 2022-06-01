@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.task82">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
@@ -11,18 +14,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Task101">
-
-        <!-- This element is required to enable Google Pay in your app. -->
+        <activity
+            android:name=".DriverChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChatActivity"
+            android:exported="false" /> <!-- This element is required to enable Google Pay in your app. -->
         <meta-data
             android:name="com.google.android.gms.wallet.api.enabled"
             android:value="true" />
 
         <activity
-            android:name="com.example.task82.CheckoutActivity"
+            android:name=".CheckoutActivity"
             android:exported="false"
             android:label="Confirm Order"
             android:theme="@style/Theme.Task101" />
-
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -39,42 +45,42 @@
             android:value="${MAPS_API_KEY}" />
 
         <activity
-            android:name="com.example.task82.MapsActivity"
+            android:name=".MapsActivity"
             android:exported="false"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name="com.example.task82.PlacesActivity"
+            android:name=".PlacesActivity"
             android:exported="false"
             android:label="Location" />
         <activity
-            android:name="com.example.task82.EstimateActivity"
+            android:name=".EstimateActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.task82.AccountActivity"
+            android:name=".AccountActivity"
             android:exported="false"
             android:label="Account" />
         <activity
-            android:name="com.example.task82.OrdersActivity"
+            android:name=".OrdersActivity"
             android:exported="false"
             android:label="My orders" />
         <activity
-            android:name="com.example.task82.DeliveryGoodsActivity"
+            android:name=".DeliveryGoodsActivity"
             android:exported="false"
             android:label="Create New Order" />
         <activity
-            android:name="com.example.task82.DeliveryActivity"
+            android:name=".DeliveryActivity"
             android:exported="false"
             android:label="Create New Order" />
         <activity
-            android:name="com.example.task82.HomeActivity"
+            android:name=".HomeActivity"
             android:exported="false"
             android:label="Home" />
         <activity
-            android:name="com.example.task82.SignUpActivity"
+            android:name=".SignUpActivity"
             android:exported="false"
             android:label="Sign Up" />
         <activity
-            android:name="com.example.task82.MainActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:label="Truck Sharing">
             <intent-filter>
