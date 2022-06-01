@@ -15,6 +15,15 @@ public class Util {
    public static final int PICK_LOCATION_REQUEST = 200;
     public static final int PICK_DESTINATION_REQUEST = 300;
 
+    // chat nodes
+
+   public static final String CHATS = "chats";
+   public static final String USERS = "users";
+   public static final String TIME_STAMP = "time_stamp";
+ public static final String LAST_MESSAGE = "last_message";
+ public static final String LAST_MESSAGE_TIME = "last_message_time";
+ public static final String UNREAD_COUNT = "unread_count";
+
     // messages nodes
    public static final String MESSAGE = "message";
    public static final String MESSAGE_ID = "message_ID";

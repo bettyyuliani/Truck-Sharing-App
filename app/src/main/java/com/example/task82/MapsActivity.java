@@ -1,21 +1,13 @@
 package com.example.task82;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.task82.databinding.ActivityMapsBinding;
-import com.example.task82.R;
-
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.volley.Request;
@@ -329,7 +321,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     // on click listener for call
     public void callClick(View view)
     {
-        Intent intent = new Intent(this, ChatActivity.class);
+        Intent intent = new Intent(this, MessageActivity.class);
         startActivity(intent);
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
 //            requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL); }

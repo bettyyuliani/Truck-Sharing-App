@@ -15,10 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Task101">
         <activity
+            android:name=".DriverChatsActivity"
+            android:exported="false" />
+        <activity
             android:name=".DriverChatActivity"
             android:exported="false" />
         <activity
-            android:name=".ChatActivity"
+            android:name=".MessageActivity"
             android:exported="false" /> <!-- This element is required to enable Google Pay in your app. -->
         <meta-data
             android:name="com.google.android.gms.wallet.api.enabled"

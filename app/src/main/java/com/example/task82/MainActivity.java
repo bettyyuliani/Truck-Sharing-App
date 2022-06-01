@@ -66,10 +66,19 @@ public class MainActivity extends AppCompatActivity {
             editor.putString(Util.LOGGEDIN_USER, loggedInUser); // key value pair for username
             editor.apply(); // apply changes
 
-            // open home activity
-            Intent homeIntent = new Intent(MainActivity.this, HomeActivity.class);
-            startActivity(homeIntent);
-            finish();
+            if (loggedInUser.equals("driver"))
+            {
+                Intent intent = new Intent(this, DriverChatsActivity.class);
+                startActivity(intent);
+                finish();
+            }
+            else
+            {
+                // open home activity
+                Intent homeIntent = new Intent(MainActivity.this, HomeActivity.class);
+                startActivity(homeIntent);
+                finish();
+            }
         }
         else {
             Toast.makeText(MainActivity.this, "The user does not exist", Toast.LENGTH_SHORT).show();

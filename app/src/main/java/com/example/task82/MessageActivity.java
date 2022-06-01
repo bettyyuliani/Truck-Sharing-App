@@ -24,12 +24,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ServerValue;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-public class ChatActivity extends AppCompatActivity {
+public class MessageActivity extends AppCompatActivity {
 
     private RecyclerView messagesRecyclerView;
     private SwipeRefreshLayout messagesSwipeRefresh;
@@ -51,7 +51,7 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
+        setContentView(R.layout.activity_message);
 
         sendIcon = findViewById(R.id.sendIcon);
         messageEditText = findViewById(R.id.enterMessageEditText);
@@ -161,18 +161,32 @@ public class ChatActivity extends AppCompatActivity {
             if (!message.equals(""))
             {
                 HashMap messageMap = new HashMap();
+                HashMap chatsMap = new HashMap();
                 messageMap.put(Util.MESSAGE, message);
                 messageMap.put(Util.MESSAGE_ID, messageID);
                 messageMap.put(Util.MESSAGE_SENDER, loggedInUsername);
                 messageMap.put(Util.MESSAGE_TIME, ServerValue.TIMESTAMP);
 
+                chatsMap.put(Util.MESSAGE, message);
+                chatsMap.put(Util.MESSAGE_SENDER, loggedInUsername);
+                chatsMap.put(Util.MESSAGE_TIME, ServerValue.TIMESTAMP);
+
                 String currentUserRef = Util.MESSAGES + "/" + loggedInUsername + "/" + driverUsername;
                 String driverRef = Util.MESSAGES + "/" + driverUsername + "/" + loggedInUsername;
+
+                String chatCurrentUserRef = Util.CHATS + "/" + loggedInUsername + "/" + driverUsername;
+                String chatDriverRef = Util.CHATS + "/" + driverUsername + "/" + loggedInUsername;
 
                 HashMap messageUserMap = new HashMap();
                 messageUserMap.put(currentUserRef + "/" + messageID, messageMap);
                 messageUserMap.put(driverRef + "/" + messageID, messageMap);
+
+//                HashMap chatUserMap = new HashMap();
+//                messageUserMap.put(chatCurrentUserRef, chatsMap);
+//                messageUserMap.put(chatDriverRef, chatsMap);
                 messageEditText.setText("");
+
+
                 mRootReference.updateChildren(messageUserMap, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {

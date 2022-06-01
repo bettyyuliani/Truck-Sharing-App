@@ -13,16 +13,19 @@
         <entry key="app/src/main/res/layout/activity_checkout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_checkout2.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_delivery.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_driver_chats.xml" value="0.21240942028985507" />
         <entry key="app/src/main/res/layout/activity_estimate.xml" value="0.12681159420289856" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_maps.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_message.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_orders.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_payment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_places.xml" value="0.20833333333333334" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.5" />
         <entry key="app/src/main/res/layout/chat_layout.xml" value="0.265625" />
-        <entry key="app/src/main/res/layout/chat_list_layout.xml" value="0.2453125" />
+        <entry key="app/src/main/res/layout/chat_list_layout.xml" value="0.19245283018867926" />
         <entry key="app/src/main/res/layout/content_delivery.xml" value="0.12681159420289856" />
+        <entry key="app/src/main/res/layout/custom_progressbar.xml" value="0.20833333333333334" />
         <entry key="app/src/main/res/layout/fragment_order.xml" value="0.25" />
         <entry key="app/src/main/res/layout/pay_with_googlepay_button.xml" value="0.1" />
         <entry key="app/src/main/res/layout/pay_with_googlepay_button_content.xml" value="0.21145833333333333" />
