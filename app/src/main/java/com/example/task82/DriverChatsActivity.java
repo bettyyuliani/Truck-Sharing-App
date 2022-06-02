@@ -6,7 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -46,9 +51,9 @@ public class DriverChatsActivity extends AppCompatActivity {
 
         chatListRecyclerView = findViewById(R.id.chatsRecyclerView);
         emptychatsTV = findViewById(R.id.emptyChatsTV);
+        chats = new ArrayList<>();
         chatListRecyclerViewAdapter = new ChatListRecyclerViewAdapter(this, chats);
 //        progressBar = findViewById(R.id.progressBar);
-        chats = new ArrayList<>();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setReverseLayout(true);
@@ -57,9 +62,9 @@ public class DriverChatsActivity extends AppCompatActivity {
         chatListRecyclerView.setAdapter(chatListRecyclerViewAdapter);
 
         databaseReferenceUsers = FirebaseDatabase.getInstance().getReference().child(Util.USERS);
-        databaseReferenceChats = FirebaseDatabase.getInstance().getReference().child(Util.MESSAGES).child(username);
+        databaseReferenceChats = FirebaseDatabase.getInstance().getReference().child(Util.CHATS);
 
-        query = databaseReferenceChats.orderByChild(Util.TIME_STAMP);
+        query = databaseReferenceChats.orderByChild(Util.MESSAGE_TIME);
         childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -93,40 +98,55 @@ public class DriverChatsActivity extends AppCompatActivity {
 
     }
 
+    // create menu on tool bar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.driver_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    // on click listener for selected options from the menu
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.logoutMenu:
+                Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(mainIntent);
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void updateList(DataSnapshot dataSnapshot, boolean isNew, String username)
     {
 //        progressBar.setVisibility(View.GONE);
         emptychatsTV.setVisibility(View.GONE);
-        final  String lastMessage, lastMessageTime, unreadCount;
+        final  String lastMessage;
+        final long lastMessageTime;
 
-        if(dataSnapshot.child(Util.LAST_MESSAGE).getValue()!=null)
-            lastMessage = dataSnapshot.child(Util.LAST_MESSAGE).getValue().toString();
+        if(dataSnapshot.child(Util.MESSAGE).getValue()!=null)
+            lastMessage = dataSnapshot.child(Util.MESSAGE).getValue().toString();
         else
             lastMessage = "";
 
-        if(dataSnapshot.child(Util.LAST_MESSAGE_TIME).getValue()!=null)
-            lastMessageTime = dataSnapshot.child(Util.LAST_MESSAGE_TIME).getValue().toString();
+        if(dataSnapshot.child(Util.MESSAGE_TIME).getValue()!=null)
+            lastMessageTime = (long) dataSnapshot.child(Util.MESSAGE_TIME).getValue();
         else
-            lastMessageTime="";
+            lastMessageTime= 0;
 
-        unreadCount=dataSnapshot.child(Util.UNREAD_COUNT).getValue()==null?
-                "0":dataSnapshot.child(Util.UNREAD_COUNT).getValue().toString();
 
         databaseReferenceUsers.child(username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String username = dataSnapshot.child(Util.USERNAME).getValue() != null?
-                        dataSnapshot.child(Util.USERNAME).getValue().toString(): "";
-                Chat chat = new Chat(username, unreadCount, lastMessage, lastMessageTime);
+                String username = dataSnapshot.child(Util.MESSAGE_SENDER).getValue() != null?
+                        dataSnapshot.child(Util.MESSAGE_SENDER).getValue().toString(): "";
+                Chat chat = new Chat(username, lastMessage, lastMessageTime);
 
-                if(isNew) {
-                    chats.add(chat);
-                    usernames.add(username);
-                }
-                else {
-                    int indexOfClickedUser = usernames.indexOf(username) ;
-                    chats.set(indexOfClickedUser, chat);
-                }
+                chats.add(chat);
                 chatListRecyclerViewAdapter.notifyDataSetChanged();
             }
 

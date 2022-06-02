@@ -48,7 +48,6 @@ public class MessagesRecyclerViewAdapter extends RecyclerView.Adapter<MessagesRe
         // get the logged in user's username from shared preferences and assign it to the respective variable
         SharedPreferences prefs = context.getSharedPreferences(Util.SHARED_PREF_DATA, context.MODE_PRIVATE);
         String loggedInUsername = prefs.getString(Util.LOGGEDIN_USER, "");
-        Log.i("astaga", loggedInUsername);
 
         String messageSender = message.getMessage_sender();
 
@@ -57,8 +56,6 @@ public class MessagesRecyclerViewAdapter extends RecyclerView.Adapter<MessagesRe
 
         String[] splitString = dateTime.split(" ");
         String messageTime = splitString[1];
-
-        Util.createToast(context,loggedInUsername + messageSender);
 
         if (loggedInUsername.equals(messageSender)) {
             holder.sentLayout.setVisibility(View.VISIBLE);

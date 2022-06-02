@@ -17,9 +17,14 @@
         app:showAsAction="never">
     </item>
 
+    <item android:id="@+id/textDriverMenu"
+        android:title="Text Driver"
+        android:visible="false"
+        app:showAsAction="never">
+    </item>
+
     <item android:id="@+id/logoutMenu"
         android:title="Logout"
         app:showAsAction="never">
     </item>
-
 </menu>

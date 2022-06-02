@@ -72,6 +72,13 @@ public class OrdersActivity extends AppCompatActivity implements ItemClickListen
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.truck_menu, menu);
+
+        if (db.getOrderCount(username) != 0)
+        {
+            MenuItem textDriver = menu.findItem(R.id.textDriverMenu);
+            textDriver.setVisible(true);
+        }
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -91,6 +98,10 @@ public class OrdersActivity extends AppCompatActivity implements ItemClickListen
                 finish();
                 return true;
             case R.id.myordersMenu:
+                return true;
+            case R.id.textDriverMenu:
+                Intent messageIntent = new Intent(getApplicationContext(), MessageActivity.class);
+                startActivity(messageIntent);
                 return true;
             case R.id.logoutMenu:
                 Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);

@@ -65,6 +65,18 @@ public class OrderDatabaseHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
+    public int getOrderCount(String username)
+    {
+        // get the readable database object
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // get all orders from the table which belongs to the logged in user
+        Cursor cursor = db.rawQuery("SELECT * FROM " + Util.ORDER_TABLE_NAME + " WHERE " + Util.USERNAME + "=?", new String[] {username});
+
+        Integer count = cursor.getCount();
+        return count;
+    }
+
     public long insertOrder(Order order) {
 
         // an editable database object

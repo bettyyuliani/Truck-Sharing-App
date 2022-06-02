@@ -48,6 +48,7 @@ public class AccountActivity extends AppCompatActivity {
 
     //Database variable
     UserDatabaseHelper userDatabaseHelper = new UserDatabaseHelper(this);
+    OrderDatabaseHelper orderDatabaseHelper = new OrderDatabaseHelper(this);
 
     @SuppressLint("Range")
     @Override
@@ -93,6 +94,13 @@ public class AccountActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.truck_menu, menu);
+
+        if (orderDatabaseHelper.getOrderCount(loggedInUsername) != 0)
+        {
+            MenuItem textDriver = menu.findItem(R.id.textDriverMenu);
+            textDriver.setVisible(true);
+        }
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -110,6 +118,14 @@ public class AccountActivity extends AppCompatActivity {
             case R.id.myordersMenu:
                 Intent ordersIntent = new Intent(getApplicationContext(), OrdersActivity.class);
                 startActivity(ordersIntent);
+                return true;
+            case R.id.textDriverMenu:
+                Intent messageIntent = new Intent(getApplicationContext(), MessageActivity.class);
+                startActivity(messageIntent);
+                return true;
+            case R.id.logoutMenu:
+                Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(mainIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

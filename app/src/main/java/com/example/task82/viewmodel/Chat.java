@@ -3,13 +3,11 @@ package com.example.task82.viewmodel;
 public class Chat {
 
     private  String username;
-    private  String unreadCount;
     private  String lastMessage;
-    private  String lastMessageTime;
+    private  long lastMessageTime;
 
-    public Chat(String username, String unreadCount, String lastMessage, String lastMessageTime) {
+    public Chat(String username, String lastMessage, long lastMessageTime) {
         this.username = username;
-        this.unreadCount = unreadCount;
         this.lastMessage = lastMessage;
         this.lastMessageTime = lastMessageTime;
     }
@@ -22,14 +20,6 @@ public class Chat {
         this.username = username;
     }
 
-    public String getUnreadCount() {
-        return unreadCount;
-    }
-
-    public void setUnreadCount(String unreadCount) {
-        this.unreadCount = unreadCount;
-    }
-
     public String getLastMessage() {
         return lastMessage;
     }
@@ -38,11 +28,11 @@ public class Chat {
         this.lastMessage = lastMessage;
     }
 
-    public String getLastMessageTime() {
+    public long getLastMessageTime() {
         return lastMessageTime;
     }
 
-    public void setLastMessageTime(String lastMessageTime) {
+    public void setLastMessageTime(long lastMessageTime) {
         this.lastMessageTime = lastMessageTime;
     }
 }

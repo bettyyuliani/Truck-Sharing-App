@@ -1,8 +1,10 @@
 package com.example.task82;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.task82.R;
+import com.example.task82.util.Util;
 
 import java.util.ArrayList;
 
@@ -28,6 +31,9 @@ public class HomeActivity extends AppCompatActivity {
 
     // variable for database
     TruckDatabaseHelper truckDatabaseHelper;
+    OrderDatabaseHelper orderDatabaseHelper = new OrderDatabaseHelper(this);
+
+    String loggedInUsername;
 
     // items to load into recycler view
     ArrayList<Truck> trucks = new ArrayList<>();
@@ -37,6 +43,12 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.truck_menu, menu);
+
+        if (orderDatabaseHelper.getOrderCount(loggedInUsername) != 0)
+        {
+            MenuItem textDriver = menu.findItem(R.id.textDriverMenu);
+            textDriver.setVisible(true);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -54,6 +66,10 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.myordersMenu:
                 Intent ordersIntent = new Intent(getApplicationContext(), OrdersActivity.class);
                 startActivity(ordersIntent);
+                return true;
+            case R.id.textDriverMenu:
+                Intent messageIntent = new Intent(getApplicationContext(), MessageActivity.class);
+                startActivity(messageIntent);
                 return true;
             case R.id.logoutMenu:
                 Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
@@ -73,11 +89,16 @@ public class HomeActivity extends AppCompatActivity {
         // create database helper object
         truckDatabaseHelper = new TruckDatabaseHelper(this);
 
+        // get the logged in user's username from shared preferences and assign it to the respective variable
+        SharedPreferences prefs = getSharedPreferences(Util.SHARED_PREF_DATA, MODE_PRIVATE);
+        loggedInUsername = prefs.getString(Util.LOGGEDIN_USER, "");
+
         // load in trucks data to database
         if (truckDatabaseHelper.fetchAllTrucks().size() == 0)
         {
             createTruckDatabase();
         }
+
 
         // obtain all trucks data from trucks database
         trucks = truckDatabaseHelper.fetchAllTrucks();

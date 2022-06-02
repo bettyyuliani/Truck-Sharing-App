@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,6 +40,7 @@ public class MessageActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private String loggedInUsername;
     private String driverUsername = "driver";
+    private String receiverUsername;
     private MessagesRecyclerViewAdapter recyclerViewAdapter;
     private ArrayList<Message> messages = new ArrayList<>();
 
@@ -63,15 +65,15 @@ public class MessageActivity extends AppCompatActivity {
         // get the logged in user's username from shared preferences and assign it to the respective variable
         SharedPreferences prefs = getSharedPreferences(Util.SHARED_PREF_DATA, MODE_PRIVATE);
         loggedInUsername = prefs.getString(Util.LOGGEDIN_USER, "");
-        Log.i("masuk", loggedInUsername);
 
         if (loggedInUsername.equals("driver"))
         {
-            driverUsername = "ty,";
+            Intent intent = getIntent();
+            receiverUsername = intent.getStringExtra(Util.MESSAGE_SENDER);
         }
         else
         {
-            driverUsername = "driver";
+            receiverUsername = driverUsername;
         }
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -113,7 +115,7 @@ public class MessageActivity extends AppCompatActivity {
     private void loadMessages()
     {
         messages.clear();
-        databaseReference = mRootReference.child(Util.MESSAGES).child(loggedInUsername).child(driverUsername);
+        databaseReference = mRootReference.child(Util.MESSAGES).child(loggedInUsername).child(receiverUsername);
 
         Query messageQuery = databaseReference.limitToLast(currentPage * RECORD_PER_PAGE);
         if (childEventListener != null)
@@ -171,20 +173,31 @@ public class MessageActivity extends AppCompatActivity {
                 chatsMap.put(Util.MESSAGE_SENDER, loggedInUsername);
                 chatsMap.put(Util.MESSAGE_TIME, ServerValue.TIMESTAMP);
 
-                String currentUserRef = Util.MESSAGES + "/" + loggedInUsername + "/" + driverUsername;
-                String driverRef = Util.MESSAGES + "/" + driverUsername + "/" + loggedInUsername;
+                String currentUserRef = Util.MESSAGES + "/" + loggedInUsername + "/" + receiverUsername;
+                String driverRef = Util.MESSAGES + "/" + receiverUsername + "/" + loggedInUsername;
 
-                String chatCurrentUserRef = Util.CHATS + "/" + loggedInUsername + "/" + driverUsername;
-                String chatDriverRef = Util.CHATS + "/" + driverUsername + "/" + loggedInUsername;
+                String chatCurrentUserRef = Util.CHATS + "/" + loggedInUsername;
 
                 HashMap messageUserMap = new HashMap();
                 messageUserMap.put(currentUserRef + "/" + messageID, messageMap);
                 messageUserMap.put(driverRef + "/" + messageID, messageMap);
 
-//                HashMap chatUserMap = new HashMap();
-//                messageUserMap.put(chatCurrentUserRef, chatsMap);
-//                messageUserMap.put(chatDriverRef, chatsMap);
                 messageEditText.setText("");
+
+                if (!loggedInUsername.equals(driverUsername))
+                {
+                    HashMap chatMap = new HashMap();
+                    chatMap.put(chatCurrentUserRef, chatsMap);
+                    mRootReference.updateChildren(chatMap, new DatabaseReference.CompletionListener() {
+                        @Override
+                        public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                            if (error != null)
+                            {
+                                Util.createToast(getApplicationContext(), "Failed to send message " + error.getMessage());
+                            }
+                        }
+                    });
+                }
 
 
                 mRootReference.updateChildren(messageUserMap, new DatabaseReference.CompletionListener() {
