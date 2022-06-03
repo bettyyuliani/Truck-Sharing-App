@@ -12,21 +12,6 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class DirectionsJSONParser {
 
-
-    public JSONObject parseDuration(JSONObject jsonObject)
-    {
-        JSONObject duration = null;
-        try
-        {
-            JSONArray jRoutes = jsonObject.getJSONArray("routes");
-            JSONArray jLegs = ( (JSONObject)jRoutes.get(0)).getJSONArray("legs");
-            duration = (JSONObject) jLegs.get(1);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return duration;
-    }
-
     /** Receives a JSONObject and returns a list of lists containing latitude and longitude
      * @return*/
     public List<List<HashMap>> parse(JSONObject jObject){

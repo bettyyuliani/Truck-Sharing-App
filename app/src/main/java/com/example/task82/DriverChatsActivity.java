@@ -29,18 +29,24 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * this activity is only visible to the driver
+ * displays all the chats that have been sent by different users
+ */
 public class DriverChatsActivity extends AppCompatActivity {
 
+    // adapter variable
+    private ChatListRecyclerViewAdapter chatListRecyclerViewAdapter;
+
+    // data variables
+    private List<Chat> chats =  new ArrayList<>();
+
+    // view variables
     private RecyclerView chatListRecyclerView;
     private TextView emptychatsTV;
-    private ProgressBar progressBar;
-    private ChatListRecyclerViewAdapter chatListRecyclerViewAdapter;
-    private List<Chat> chats;
-    private List<String> usernames = new ArrayList<>();
 
+    // variables for firebase
     private DatabaseReference databaseReferenceChats, databaseReferenceUsers;
-    private String username = "driver";
-
     private ChildEventListener childEventListener;
     private Query query;
 
@@ -49,52 +55,59 @@ public class DriverChatsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_chats);
 
+        // obtain views
         chatListRecyclerView = findViewById(R.id.chatsRecyclerView);
         emptychatsTV = findViewById(R.id.emptyChatsTV);
-        chats = new ArrayList<>();
-        chatListRecyclerViewAdapter = new ChatListRecyclerViewAdapter(this, chats);
-//        progressBar = findViewById(R.id.progressBar);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-        linearLayoutManager.setReverseLayout(true);
-        linearLayoutManager.setStackFromEnd(true);
-        chatListRecyclerView.setLayoutManager(linearLayoutManager);
+        //create and set a new adapter to link recycler view to the associated data
+        chatListRecyclerViewAdapter = new ChatListRecyclerViewAdapter(this, chats);
         chatListRecyclerView.setAdapter(chatListRecyclerViewAdapter);
 
-        databaseReferenceUsers = FirebaseDatabase.getInstance().getReference().child(Util.USERS);
-        databaseReferenceChats = FirebaseDatabase.getInstance().getReference().child(Util.CHATS);
+        // manages layout of the recycler view
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext()); // create a linear layout manager
+        linearLayoutManager.setReverseLayout(true); // reverse layout order
+        linearLayoutManager.setStackFromEnd(true); // display views from the end of the data
+        chatListRecyclerView.setLayoutManager(linearLayoutManager); // set layout manager
 
+        // obtain firebase nodes
+        databaseReferenceUsers = FirebaseDatabase.getInstance().getReference().child(Util.USERS); // get user nodes
+        databaseReferenceChats = FirebaseDatabase.getInstance().getReference().child(Util.CHATS); // get chat nodes
+
+        // sort chats by message time
         query = databaseReferenceChats.orderByChild(Util.MESSAGE_TIME);
+
+        // create new listener for child nodes
         childEventListener = new ChildEventListener() {
+            // if a new child node is added
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                updateList(snapshot, true, snapshot.getKey());
+                updateList(snapshot, snapshot.getKey());
             }
 
+            // if data in child node is changed
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                updateList(snapshot, true, snapshot.getKey());
+                updateList(snapshot, snapshot.getKey());
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
+                // TODO: if child node is removed
             }
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
+                // TODO: if child node is moved
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                // TODO: if task is cancelled
             }
         };
 
-        query.addChildEventListener(childEventListener);
-//        progressBar.setVisibility(View.VISIBLE);
-        emptychatsTV.setVisibility(View.VISIBLE);
+        query.addChildEventListener(childEventListener); // add the event listener to the new chat query
+        emptychatsTV.setVisibility(View.VISIBLE); // hide 'no chats' text view
 
     }
 
@@ -121,32 +134,46 @@ public class DriverChatsActivity extends AppCompatActivity {
         }
     }
 
-    private void updateList(DataSnapshot dataSnapshot, boolean isNew, String username)
+    /**
+     * update and refresh list of chats
+     * @param dataSnapshot new data/node in the firebase
+     * @param username username of message sender
+     */
+    private void updateList(DataSnapshot dataSnapshot, String username)
     {
-//        progressBar.setVisibility(View.GONE);
-        emptychatsTV.setVisibility(View.GONE);
-        final  String lastMessage;
-        final long lastMessageTime;
+        emptychatsTV.setVisibility(View.GONE); // hide 'no chats' text view
+        final String lastMessage; // last message sent by sender
+        final long lastMessageTime; // time stamp of last message sent
 
-        if(dataSnapshot.child(Util.MESSAGE).getValue()!=null)
+        // checks if the message value of the newly added node exists
+        if(dataSnapshot.child(Util.MESSAGE).getValue()!=null) {
             lastMessage = dataSnapshot.child(Util.MESSAGE).getValue().toString();
-        else
+        }
+        else {
             lastMessage = "";
+        }
 
-        if(dataSnapshot.child(Util.MESSAGE_TIME).getValue()!=null)
+        // checks if the time stamp value of the newly added node exists
+        if(dataSnapshot.child(Util.MESSAGE_TIME).getValue()!=null) {
             lastMessageTime = (long) dataSnapshot.child(Util.MESSAGE_TIME).getValue();
-        else
+        }
+        else {
             lastMessageTime= 0;
+        }
 
-
+        // listener for the changes in child node
         databaseReferenceUsers.child(username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // if username exists, return the value, otherwise return ""
                 String username = dataSnapshot.child(Util.MESSAGE_SENDER).getValue() != null?
                         dataSnapshot.child(Util.MESSAGE_SENDER).getValue().toString(): "";
+                // create new chat object
                 Chat chat = new Chat(username, lastMessage, lastMessageTime);
 
+                // add the new chat into the chats list
                 chats.add(chat);
+                // notify recycler view for changes in data in order to refresh views
                 chatListRecyclerViewAdapter.notifyDataSetChanged();
             }
 

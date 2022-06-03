@@ -40,12 +40,6 @@ public class DeliveryActivity extends AppCompatActivity {
     CalendarView calendarView;
     EditText receiverNameEditText, pickUpLocationEditText, destinationEditText;
     TextView timeTextView;
-    ImageView goodImageView;
-
-    // variables for image and gallery service
-    public static final int IMAGE_GALLERY_REQUEST = 100;
-    private Bitmap image;
-    byte[] goodImageBytes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +47,6 @@ public class DeliveryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_delivery);
 
         // get views
-        goodImageView = findViewById(R.id.goodsImageView);
         receiverNameEditText = findViewById(R.id.receiverNameEditText);
         pickUpLocationEditText = findViewById(R.id.locationEditText);
         destinationEditText = findViewById(R.id.destinationEditText);
@@ -69,47 +62,20 @@ public class DeliveryActivity extends AppCompatActivity {
         });
     }
 
-    // listener to add photo
-    public void popPhotoPicker(View view)
-    {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        startActivityForResult(intent, IMAGE_GALLERY_REQUEST);
-    }
-
-    // check results returned from gallery
+    // check results returned from places autocomplete
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == IMAGE_GALLERY_REQUEST)
-        {
-            if (resultCode == RESULT_OK) {
-                    Uri imageUri = data.getData();
-                    InputStream inputStream;
-
-                    try {
-                        inputStream = getContentResolver().openInputStream(imageUri);
-                        image = BitmapFactory.decodeStream(inputStream);
-                        goodImageBytes = Util.getBytesArrayFromBitmap(image);
-                        goodImageView.setImageBitmap(image);
-                    }
-                    catch (FileNotFoundException e) {
-                        Util.createToast(this, "File not found!");
-                    }
-            }
-            else
-            {
-                setDefaultImage();
-            }
-        }
-        else if (requestCode == Util.PICK_LOCATION_REQUEST && resultCode == RESULT_OK)
+        // if user is choosing the pick up location
+        if (requestCode == Util.PICK_LOCATION_REQUEST && resultCode == RESULT_OK)
         {
             pickUpLocation = data.getStringExtra(Util.LOCATION);
             pickUpLocationEditText.setText(pickUpLocation);
             locationLatitude = data.getDoubleExtra(Util.LOCATION_LATITUDE, 0);
             locationLongitude = data.getDoubleExtra(Util.LOCATION_LONGITUDE, 0);
         }
-        else if (requestCode == Util.PICK_DESTINATION_REQUEST && resultCode == RESULT_OK)
+        // if user is choosing the destination location
+        if (requestCode == Util.PICK_DESTINATION_REQUEST && resultCode == RESULT_OK)
         {
             destination = data.getStringExtra(Util.DESTINATION);
             destinationEditText.setText(destination);
@@ -118,15 +84,7 @@ public class DeliveryActivity extends AppCompatActivity {
         }
     }
 
-    // if user doesn't select a photo, set a default image for the user
-    public void setDefaultImage()
-    {
-        Bitmap defaultPic = BitmapFactory.decodeResource(getResources(), R.drawable.box);
-        goodImageBytes = Util.getBytesArrayFromBitmap(defaultPic);
-        goodImageView.setImageBitmap(defaultPic);
-    }
-
-    // on click listener for location
+    // on click listener for location edit text (used to open up autocomplete feature)
     public void locationClick(View view)
     {
         Intent intent = new Intent(this, PlacesActivity.class);
@@ -134,7 +92,7 @@ public class DeliveryActivity extends AppCompatActivity {
         startActivityForResult(intent, Util.PICK_LOCATION_REQUEST);
     }
 
-    // on click listener for destination
+    // on click listener for destination edit text (used to open up autocomplete feature)
     public void destinationClick(View view)
     {
         Intent intent = new Intent(this, PlacesActivity.class);
@@ -146,12 +104,6 @@ public class DeliveryActivity extends AppCompatActivity {
     public void nextClick(View view)
     {
         receiverName = receiverNameEditText.getText().toString();
-
-        // set to default image if user didn't choose any image
-        if (goodImageBytes == null)
-        {
-            setDefaultImage();
-        }
 
         // mandatory data
         if (receiverName == "" || pickUpDate == null || pickUpTime == null || pickUpLocation == "" || destination == "")
@@ -170,7 +122,6 @@ public class DeliveryActivity extends AppCompatActivity {
             intent.putExtra(Util.DESTINATION, destination);
             intent.putExtra(Util.DESTINATION_LATITUDE, destinationLatitude);
             intent.putExtra(Util.DESTINATION_LONGITUDE, destinationLongitude);
-            intent.putExtra(Util.GOOD_IMAGE, goodImageBytes);
             startActivity(intent);
             finish();
         }

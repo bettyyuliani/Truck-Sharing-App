@@ -36,17 +36,17 @@ public class AccountActivity extends AppCompatActivity {
     EditText accFullNameET, accUsernameET, accPasswordET, accConfirmPasswordET, accPhoneNoET;
     Button accCancelButton, accSaveButton;
 
-    //Data variables
+    // data variables
     User user;
     byte[] userImageBytesArray;
     Bitmap userImageBitmap;
     String userFullName, username, password, passwordConfirm, phoneNumber;
     String loggedInUsername; // keep track of logged in username
 
-    //Request variable
+    // request variable
     final int GALLERY_REQUEST = 100;
 
-    //Database variable
+    // database variables
     UserDatabaseHelper userDatabaseHelper = new UserDatabaseHelper(this);
     OrderDatabaseHelper orderDatabaseHelper = new OrderDatabaseHelper(this);
 
@@ -164,6 +164,7 @@ public class AccountActivity extends AppCompatActivity {
         }
     }
 
+    // on click listener for cancel changes
     public void cancelChangesClick(View view)
     {
         Intent homeIntent = new Intent(this, HomeActivity.class);
@@ -195,31 +196,37 @@ public class AccountActivity extends AppCompatActivity {
         }
         else
         {
+            // if user made changes to profile picture
             if (!userImageBytesArray.equals(user.getImage()))
             {
                 contentValues.put(Util.PROFILE_PICTURE, userImageBytesArray);
                 user.setImage(userImageBytesArray);
             }
+            // if user made changes to full name
             if (!userFullName.equals("") && !userFullName.equals(user.getName()))
             {
                 contentValues.put(Util.NAME, userFullName);
                 user.setName(userFullName);
             }
+            // if user made changes to username
             if (!username.equals("") && !username.equals(user.getUsername()))
             {
                 contentValues.put(Util.USERNAME, username);
                 user.setUsername(username);
             }
+            // if user made changes to password
             if (!password.equals("") && !password.equals(user.getPassword()))
             {
                 contentValues.put(Util.PASSWORD, password);
                 user.setPassword(password);
             }
+            // if user made changes to phone number
             if (!phoneNumber.equals("") && !phoneNumber.equals(user.getPhoneNo()))
             {
                 contentValues.put(Util.PHONE_NO, phoneNumber);
                 user.setPhoneNo(phoneNumber);
             }
+            // if user made changes
             if (!contentValues.isEmpty())
             {
                 // update data in the database
@@ -230,7 +237,6 @@ public class AccountActivity extends AppCompatActivity {
                         // update orders in the order table
                         ContentValues contentValues1 = new ContentValues();
                         contentValues1.put(Util.USERNAME, user.getUsername());
-
                         OrderDatabaseHelper order_db = new OrderDatabaseHelper(this);
                         order_db.updateUsername(loggedInUsername, contentValues1);
 
@@ -250,10 +256,12 @@ public class AccountActivity extends AppCompatActivity {
                     Util.createToast(this, "Changes not saved");
                 }
             }
+            // if user did not make any changes
             else
             {
                 Util.createToast(this, "No changes made");
             }
+            // go back to home page
             Intent homeIntent = new Intent(this, HomeActivity.class);
             startActivity(homeIntent);
         }

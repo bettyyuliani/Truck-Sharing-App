@@ -30,7 +30,10 @@ import java.util.Locale;
 
 public class SignUpActivity extends AppCompatActivity {
 
+    // database variable
     UserDatabaseHelper databaseHelper;
+
+    // view variables
     ImageView addImageView;
     EditText signupFullNameEditText;
     EditText signupDateofBirthEditText;
@@ -41,12 +44,13 @@ public class SignUpActivity extends AppCompatActivity {
     EditText signupPhoneNoEditText;
     Button createAccountButton;
 
-    public static final int PROFILE_PICTURE_REQUEST = 100;
-    public static final int AUTOFILL_REQUEST = 200;
+    // variables for image
     private Bitmap image;
     byte[] userImageBytes;
-    //Request variable
 
+    // request variables
+    public static final int PROFILE_PICTURE_REQUEST = 100;
+    public static final int AUTOFILL_REQUEST = 200;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,76 +80,108 @@ public class SignUpActivity extends AppCompatActivity {
         startActivityForResult(intent, PROFILE_PICTURE_REQUEST);
     }
 
-    //Check for results returned from the Gallery application
+    // check for results returned from intent
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        // if result is obtained from profile picture request
         if (requestCode == PROFILE_PICTURE_REQUEST){
 
+            // if RESULT_OK is received from the intent
             if (resultCode == RESULT_OK)
             {
-                Uri imageUri = data.getData();  // The address of the image
+                Uri imageUri = data.getData();  // get uri of selected image
                 InputStream inputStream;
 
                 try {
-                    inputStream = getContentResolver().openInputStream(imageUri);
-                    image = BitmapFactory.decodeStream(inputStream);
+                    inputStream = getContentResolver().openInputStream(imageUri); // get the InputStream from the uri
+                    image = BitmapFactory.decodeStream(inputStream); // decode the InputStream into bitmap
 
-                    userImageBytes = Util.getBytesArrayFromBitmap(image);
+                    userImageBytes = Util.getBytesArrayFromBitmap(image); // get bytes array of the selected image to be stored into the database
 
-                    addImageView.setImageBitmap(image);
+                    addImageView.setImageBitmap(image); // set image view to selected image
                 }
+                // catch file not found exception
                 catch (FileNotFoundException e) {
                     Util.createToast(this, "File not found!");
                 }
             }
             else
             {
-                setDefaultImage();
+                setDefaultImage(); // if no image was selected, set to default image
             }
         }
-        else if (requestCode == AUTOFILL_REQUEST)
+
+        // if result is obtained from autofill request
+        if (requestCode == AUTOFILL_REQUEST)
         {
+            // create FirebaseVisionImage object
             FirebaseVisionImage image;
             try {
-                image = FirebaseVisionImage.fromFilePath(getApplicationContext(), data.getData());
-                FirebaseVisionTextRecognizer textRecognizer = FirebaseVision.getInstance()
-                        .getOnDeviceTextRecognizer();
-                Task<FirebaseVisionText> firebaseVisionTextTask = textRecognizer.processImage(image)
-                        .addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
-                            @Override
-                            public void onSuccess(FirebaseVisionText result) {
-                                for (FirebaseVisionText.TextBlock block: result.getTextBlocks()) {
-                                    for (FirebaseVisionText.Line line: block.getLines()) {
-                                        int lineCount = line.getElements().size();
-                                        int index = 0;
+                image = FirebaseVisionImage.fromFilePath(getApplicationContext(), data.getData()); // parse image to FirebaseVisionImage
+                FirebaseVisionTextRecognizer textRecognizer = FirebaseVision.getInstance().getOnDeviceTextRecognizer(); // create TextRecognizer object
+
+                // start to process text recognition from the selected image
+                Task<FirebaseVisionText> firebaseVisionTextTask = textRecognizer.processImage(image).addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
+                    // if process is successful
+                    @Override
+                    public void onSuccess(FirebaseVisionText result) {
+
+                        // traverse all text blocks in the image
+                        for (FirebaseVisionText.TextBlock block: result.getTextBlocks()) {
+
+                            // traverse all lines in the block
+                            for (FirebaseVisionText.Line line: block.getLines()) {
+
+                                int lineCount = line.getElements().size(); // count of line
+                                    int index = 0; // starting index
+
+                                        // traverse each element in the line
                                         while (index < lineCount) {
+
+                                            // obtain text in the line
                                             FirebaseVisionText.Element element = line.getElements().get(index);
                                             String text = element.getText().toLowerCase(Locale.ROOT);
 
+                                            // if line is associated to the name of the user
                                             if (text.contains("name")) {
+                                                // obtain name
                                                 for (int i = index + 1; i < lineCount - 1; i++) {
                                                     signupFullNameEditText.append(line.getElements().get(i).getText() + " ");
                                                 }
                                                 signupFullNameEditText.append(line.getElements().get(lineCount - 1).getText());
                                                 break;
-                                            } else if (text.contains("birth")) {
+                                            }
+
+                                            // if line is associated to the date of birth of the user
+                                            else if (text.contains("birth")) {
+                                                // obtain date of birth
                                                 for (int i = index + 1; i < lineCount - 1; i++) {
                                                     signupDateofBirthEditText.append(line.getElements().get(i).getText() + " ");
                                                 }
                                                 signupDateofBirthEditText.append(line.getElements().get(lineCount - 1).getText());
                                                 break;
-                                            } else if (text.contains("address")) {
+                                            }
+
+                                            // if line is associated to the address of the user
+                                            else if (text.contains("address")) {
+                                                // obtain address
                                                 for (int i = index + 1; i < lineCount - 1; i++) {
                                                     signupAddressEditText.append(line.getElements().get(i).getText() + " ");
                                                 }
                                                 signupAddressEditText.append(line.getElements().get(lineCount - 1).getText());
                                                 break;
-                                            } else if (text.contains("phone")) {
+                                            }
+
+                                            // if line is associated to the phone number of the user
+                                            else if (text.contains("phone")) {
                                                 signupPhoneNoEditText.append(line.getElements().get(index+2).getText());
                                                 break;
-                                            } else {
+                                            }
+
+                                            // if line is not associated to any information
+                                            else {
                                                 index++;
                                             }
                                         }
@@ -153,19 +189,22 @@ public class SignUpActivity extends AppCompatActivity {
                                 }
                             }
                         })
-                        .addOnFailureListener(
-                                new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Util.createToast(getApplicationContext(), "an error has occured!");
-                                    }
-                                });
-            } catch (IOException e) {
+                        // listener for if the text recognition process failed
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Util.createToast(getApplicationContext(), "an error has occured!");
+                            }
+                        });
+            }
+            // catch exceptions
+            catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
+    // on click listener for autofill request
     public void autofillClick(View view)
     {
         Intent intent = new Intent();
@@ -185,35 +224,46 @@ public class SignUpActivity extends AppCompatActivity {
     // on click listener for create account (finalizing button)
     public void createAccountClick(View view)
     {
+        // obtain data from edit text
         String fullName = signupFullNameEditText.getText().toString();
         String userName = signupUserNameEditText.getText().toString();
         String password = signupPasswordEditText.getText().toString();
         String confirmPassword = signupConfirmPasswordEditText.getText().toString();
         String phoneNo = signupPhoneNoEditText.getText().toString();
 
+        // checks if username exists
         if (databaseHelper.userExists(userName))
         {
             Util.createToast(SignUpActivity.this, "Username unavailable!");
         }
         else
         {
+            // checks if two password matches
             if (password.equals(confirmPassword)) {
+
                 if (userImageBytes == null)
                 {
-                    setDefaultImage();
+                    setDefaultImage(); // set to default profile picture if no picture was selected
                 }
+
+                // create a new entry in database
                 long rowID = databaseHelper.insertUser(new User(userImageBytes, fullName, userName, password, phoneNo));
 
+                // if entry was created successfully
                 if (rowID > 0) {
                     Util.createToast(SignUpActivity.this, "Registered successfully!");
+
+                    // go back to login page
                     Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }
+                // if entry creation was not successful
                 else {
                     Util.createToast(SignUpActivity.this, "Registration error!");
                 }
             }
+            // if two passwords do not match
             else {
                 Util.createToast(SignUpActivity.this, "Passwords do not match!");
             }

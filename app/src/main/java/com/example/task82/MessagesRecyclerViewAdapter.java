@@ -23,7 +23,7 @@ import java.util.Date;
 
 public class MessagesRecyclerViewAdapter extends RecyclerView.Adapter<MessagesRecyclerViewAdapter.MessageViewHolder> {
 
-    //declare variables
+    // declare variables
     private ArrayList<Message> messages;
     private Context context;
     private FirebaseAuth firebaseAuth;

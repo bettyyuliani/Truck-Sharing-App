@@ -8,10 +8,23 @@
     <string name="previous">Previous</string>
 
     <string-array name="good_types">
-        <item>Furniture</item>
-        <item>Dry Goods</item>
-        <item>Food</item>
-        <item>Building Material</item>
+        <item>Chair</item>
+        <item>Bed</item>
+        <item>Table</item>
+        <item>Fridge</item>
+        <item>Computer</item>
+        <item>Watch</item>
+        <item>Dish</item>
+        <item>Bread</item>
+        <item>Pizza</item>
+        <item>Chips</item>
+        <item>Vegetables</item>
+        <item>Rice</item>
+        <item>Nuts</item>
+        <item>Metal</item>
+        <item>Timber</item>
+        <item>Coal</item>
+        <item>Dirt</item>
         <item>Other</item>
     </string-array>
 

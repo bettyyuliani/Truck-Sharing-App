@@ -19,14 +19,18 @@ import java.util.Date;
 import java.util.List;
 
 public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRecyclerViewAdapter.ChatListViewHolder> {
+
+    // declare variables
     private Context context;
     private List<Chat> chats;
 
+    // constructor
     public ChatListRecyclerViewAdapter(Context context, List<Chat> chats) {
         this.context = context;
         this.chats = chats;
     }
 
+    // create layout for each view holder
     @NonNull
     @Override
     public ChatListRecyclerViewAdapter.ChatListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -34,23 +38,27 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
         return new ChatListViewHolder(view);
     }
 
-
+    // modify the UI elements in each of the view holder
     @Override
     public void onBindViewHolder(@NonNull ChatListRecyclerViewAdapter.ChatListViewHolder holder, int position) {
-        Chat chat = chats.get(position);
+        Chat chat = chats.get(position); // for each chat in the list
 
+        // objects to reformat time in integer format to date format
         SimpleDateFormat sfd = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         String dateTime = sfd.format(new Date(chat.getLastMessageTime()));
-
         String[] splitString = dateTime.split(" ");
-        String messageTime = splitString[1];
 
+        // retrieve timestamp
+        String messageTime = splitString[1];
+        // retrieve message sender
         String messageSender = chat.getUsername();
 
+        // set text for each view according to its associated data
         holder.chatListTime.setText(messageTime);
         holder.chatListMessage.setText(chat.getLastMessage());
         holder.chatListName.setText(messageSender);
 
+        // set on click listener for each view holder
         holder.chatListLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,18 +69,22 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
         });
     }
 
+    // return the number of data
     @Override
     public int getItemCount() {
         return chats.size();
     }
 
+    // view holder or container for each item in the recycler view
     public class ChatListViewHolder extends RecyclerView.ViewHolder {
 
+        // view variables
         public LinearLayout chatListLayout;
-        private TextView chatListName, chatListMessage, chatListTime, chatListUnreadCount;
+        private TextView chatListName, chatListMessage, chatListTime;
         public ChatListViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            // obtain views
             chatListLayout = itemView.findViewById(R.id.chatListLayout);
             chatListName = itemView.findViewById(R.id.chatListName);
             chatListMessage = itemView.findViewById(R.id.chatListMessage);

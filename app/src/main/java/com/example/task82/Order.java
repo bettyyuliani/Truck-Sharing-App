@@ -9,6 +9,7 @@ public class Order implements Serializable {
     private String receiverName, date, time, location, destination, goodType, vehicleType;
     private String weight, width, length, height;
     private double locationLatitude, locationLongitude, destinationLatitude, destinationLongitude;
+
     // the logged in user which made the order
     private String username;
 
@@ -32,6 +33,11 @@ public class Order implements Serializable {
         this.height = height;
         this.length = length;
     }
+
+    // empty constructor, order details will be added with setters
+    public Order() {}
+
+    // ====== GETTERS AND SETTERS ======
 
     public double getLocationLatitude() {
         return locationLatitude;
@@ -72,9 +78,6 @@ public class Order implements Serializable {
     public void setDestination(String destination) {
         this.destination = destination;
     }
-
-    // empty constructor, order details will be added with setters
-    public Order() {}
 
     public String getUsername() {
         return username;

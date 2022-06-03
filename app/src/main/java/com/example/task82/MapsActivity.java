@@ -1,13 +1,18 @@
 package com.example.task82;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.volley.Request;
@@ -56,7 +61,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     TextView originTV, destinationTV, fareTV, timeTV;
 
-    // declare variables used inside this actvity
+    // declare variables used inside this activity
     private String receiverName;
     private String time;
     private String date;
@@ -318,19 +323,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         startActivity(intent);
     }
 
-    // on click listener for call
+    // on click listener for call driver button
     public void callClick(View view)
+    {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL); }
+        else
+        {
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse("tel: 048423233"));
+            startActivity(intent);
+        }
+    }
+
+    // on click listener for text driver button
+    public void textClick (View view)
     {
         Intent intent = new Intent(this, MessageActivity.class);
         startActivity(intent);
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-//            requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL); }
-//        else
-//        {
-//            Intent intent = new Intent(Intent.ACTION_CALL);
-//            intent.setData(Uri.parse("tel: 048423233"));
-//            startActivity(intent);
-//        }
     }
 
 }
