@@ -144,8 +144,8 @@ public class DeliveryGoodsActivity extends AppCompatActivity implements AdapterV
 
             if (rowID > 0) {
                 Util.createToast(getApplicationContext(), "Order Successfully Created");
-                Intent homeIntent = new Intent(this, HomeActivity.class);
-                startActivity(homeIntent);
+                Intent orderIntent = new Intent(this, OrdersActivity.class);
+                startActivity(orderIntent);
                 finish();
             }
             else {
