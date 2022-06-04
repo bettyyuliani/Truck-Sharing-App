@@ -3,7 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/chat_list_background">
 
     <LinearLayout
         android:id="@+id/chatListLayout"
@@ -23,7 +28,7 @@
             android:layout_height="75dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/head" />
+            app:srcCompat="@drawable/profile" />
 
         <LinearLayout
             android:layout_width="180dp"
@@ -40,6 +45,8 @@
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 tools:text="username" />
 
             <TextView
@@ -75,8 +82,8 @@
         android:layout_height="0.1dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/chatListLayout"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chatListLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

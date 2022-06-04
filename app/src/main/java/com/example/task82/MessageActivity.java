@@ -11,6 +11,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -125,6 +128,44 @@ public class MessageActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    // create menu on tool bar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.truck_menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    // on click listener for selected options from the menu
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.homeMenu:
+                Intent homeIntent = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(homeIntent);
+                return true;
+            case R.id.accountMenu:
+                Intent accountIntent = new Intent(getApplicationContext(), AccountActivity.class);
+                startActivity(accountIntent);
+                return true;
+            case R.id.myordersMenu:
+                Intent ordersIntent = new Intent(getApplicationContext(), OrdersActivity.class);
+                startActivity(ordersIntent);
+                return true;
+            case R.id.textDriverMenu:
+                return true;
+            case R.id.logoutMenu:
+                Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(mainIntent);
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     /**

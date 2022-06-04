@@ -12,21 +12,24 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="Truck Sharing App"
-        android:textColor="#000000"
-        android:textSize="30dp" />
+        android:textColor="@color/purple_800"
+        android:textSize="30dp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:text="Use your fingerprint to login"
         android:textColor="#000000"
-        android:textSize="18sp" />
+        android:textSize="14sp" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="20dp"
+        android:layout_marginVertical="5dp"
         android:src="@drawable/ic_fingerprint" />
 
     <TextView

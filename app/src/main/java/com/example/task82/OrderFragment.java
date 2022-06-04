@@ -84,7 +84,7 @@ public class OrderFragment extends Fragment {
         TextView locationTextView = view.findViewById(R.id.locationFragmentTV);
         TextView destinationTextView = view.findViewById(R.id.destinationFragmentTV);
         TextView goodTypeTextView = view.findViewById(R.id.goodTypeFragmentTV);
-        TextView vehicleTypeTextView = view.findViewById(R.id.vehicleTypeTV);
+        TextView vehicleTypeTextView = view.findViewById(R.id.vehicleFragmentTV);
         TextView weightTextView = view.findViewById(R.id.weightFragmentTV);
         TextView lengthTextView = view.findViewById(R.id.lengthFragmentTV);
         TextView heightTextView = view.findViewById(R.id.heightFragmentTV);

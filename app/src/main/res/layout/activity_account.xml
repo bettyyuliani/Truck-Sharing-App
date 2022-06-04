@@ -93,10 +93,11 @@
         android:layout_height="49dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="64dp"
-        android:backgroundTint="#673AB7"
+        android:backgroundTint="@color/purple_400"
         android:onClick="saveChangesClick"
         android:text="Save"
         android:textColor="#FFFFFF"
+        app:cornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/accPhoneNoET" />
 
@@ -106,10 +107,11 @@
         android:layout_height="49dp"
         android:layout_marginStart="64dp"
         android:layout_marginTop="40dp"
-        android:backgroundTint="#919191"
+        android:backgroundTint="@color/quantum_grey300"
         android:onClick="cancelChangesClick"
         android:text="Cancel"
         android:textColor="#000000"
+        app:cornerRadius="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/accPhoneNoET" />
 

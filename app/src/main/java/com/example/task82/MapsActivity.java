@@ -220,7 +220,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 lineOptions.addAll(points);
                 lineOptions.width(16);
-                lineOptions.color(Color.BLUE);
+                lineOptions.color(Color.rgb(95,63,166));
                 lineOptions.geodesic(true);
 
             }
@@ -299,8 +299,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Add a marker in origin and move the camera
         LatLng origin = new LatLng(locationLatitude, locationLongitude);
         LatLng destination = new LatLng(destinationLatitude, destinationLongitude);
-        mMap.addMarker(new MarkerOptions().position(origin).title("Origin").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
-        mMap.addMarker(new MarkerOptions().position(destination).title("Destination").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+        mMap.addMarker(new MarkerOptions().position(origin).title("Origin").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
+        mMap.addMarker(new MarkerOptions().position(destination).title("Destination").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(origin, 13));
     }
 

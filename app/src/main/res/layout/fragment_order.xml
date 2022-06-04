@@ -31,6 +31,7 @@
         android:layout_marginStart="64dp"
         android:layout_marginTop="12dp"
         android:text="RECEIVER"
+        android:textColor="@color/quantum_deeppurple400"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,6 +86,7 @@
         android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
         android:text="TIME"
+        android:textColor="@color/quantum_deeppurple400"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -97,6 +99,7 @@
         android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
         android:text="DATE"
+        android:textColor="@color/purple_800"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -109,6 +112,7 @@
         android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
         android:text="LOCATION"
+        android:textColor="@color/purple_800"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -121,30 +125,56 @@
         android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
         android:text="DESTINATION"
+        android:textColor="@color/quantum_deeppurple400"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragmentLocationTextView2" />
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/widthLayout"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:text="GOOD DESCRIPTION"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.472"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentLocationTextView2" />
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="37dp"
+        android:background="@drawable/shape"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@+id/weightLayout"
+        app:layout_constraintTop_toBottomOf="@+id/destinationFragmentTV">
+
+
+        <TextView
+            android:id="@+id/widthTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:text="Width"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/widthFragmentTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/widthTV" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/lengthLayout"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/shape"
         android:orientation="vertical"
         app:layout_constraintStart_toEndOf="@+id/heightLayout"
@@ -178,87 +208,11 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/weightLayout"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/shape"
-        android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11">
-
-
-        <TextView
-            android:id="@+id/weightTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:text="Weight"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/weightFragmentTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="5dp"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/weightTV" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/vehicleTypeLayout"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/shape"
-        android:orientation="vertical"
-        app:layout_constraintStart_toEndOf="@+id/goodTypeLayout"
-        app:layout_constraintTop_toBottomOf="@+id/lengthLayout">
-
-
-        <TextView
-            android:id="@+id/vehicleTypeTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:text="Vehicle Type"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/vehicleFragmentTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="5dp"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/vehicleTypeTV" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/heightLayout"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/shape"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
@@ -292,31 +246,31 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/widthLayout"
+        android:id="@+id/vehicleTypeLayout"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/shape"
         android:orientation="vertical"
-        app:layout_constraintStart_toEndOf="@+id/weightLayout"
-        app:layout_constraintTop_toBottomOf="@+id/textView11">
+        app:layout_constraintStart_toEndOf="@+id/goodTypeLayout"
+        app:layout_constraintTop_toBottomOf="@+id/lengthLayout">
 
 
         <TextView
-            android:id="@+id/widthTV"
+            android:id="@+id/vehicleTypeTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
-            android:text="Width"
+            android:text="Vehicle Type"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/widthFragmentTV"
+            android:id="@+id/vehicleFragmentTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -325,7 +279,45 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/widthTV" />
+            app:layout_constraintTop_toBottomOf="@+id/vehicleTypeTV" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/weightLayout"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/shape"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentLocationTextView">
+
+
+        <TextView
+            android:id="@+id/weightTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:text="Weight"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/weightFragmentTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/weightTV" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -334,7 +326,7 @@
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/shape"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
@@ -374,11 +366,11 @@
         android:id="@+id/getEstimateButton"
         android:layout_width="183dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="5dp"
-        android:backgroundTint="#8E8E8E"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="@color/quantum_deeppurple300"
         android:onClick="estimateClick"
         android:text="GET ESTIMATE"
-        android:textColor="#000000"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
