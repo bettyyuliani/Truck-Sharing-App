@@ -87,7 +87,7 @@ public class BiometricActivity extends AppCompatActivity {
         });
 
         // creates a prompt message
-        final BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder().setTitle("GFG")
+        final BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder().setTitle("Truck Sharing App")
                 .setDescription("Use your fingerprint to login ").setNegativeButtonText("Cancel").build();
         biometricLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
