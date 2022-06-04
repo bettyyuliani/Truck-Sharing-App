@@ -192,6 +192,7 @@
         android:onClick="bookClick"
         android:text="Book Now"
         android:textColor="@color/white"
+        map:cornerRadius="20dp"
         map:strokeColor="#4A4A4A"
         map:strokeWidth="7px" />
 
@@ -213,6 +214,7 @@
             android:onClick="callClick"
             android:text="Call Driver"
             android:textColor="@color/quantum_grey800"
+            map:cornerRadius="18dp"
             map:strokeColor="#4A4A4A"
             map:strokeWidth="7dp" />
 
@@ -226,6 +228,7 @@
             android:onClick="textClick"
             android:text="Text Driver"
             android:textColor="@color/quantum_grey900"
+            map:cornerRadius="18dp"
             map:strokeColor="#4A4A4A"
             map:strokeWidth="7dp" />
     </LinearLayout>

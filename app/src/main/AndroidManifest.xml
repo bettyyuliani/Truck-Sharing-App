@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
 
     <application
         android:allowBackup="true"
@@ -15,22 +15,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Task101">
+        <activity
+            android:name=".StartActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <service
             android:name=".ChatMessagingService"
-            android:permission="com.google.android.c2dm.permission.SEND"
             android:enabled="true"
-            android:exported="false">
+            android:exported="false"
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
-                <action android:name="com.google.android.c2dm.permission.RECEIVE"/>
+                <action android:name="com.google.android.c2dm.permission.RECEIVE" />
             </intent-filter>
         </service>
 
         <activity
             android:name=".BiometricActivity"
             android:exported="false" />
-
         <activity
             android:name=".DriverChatsActivity"
             android:exported="false" />
@@ -92,17 +100,11 @@
         <activity
             android:name=".SignUpActivity"
             android:exported="false"
-            android:label="Sign Up" />
+            android:label="Sign Up"/>
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:label="Truck Sharing">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"
+            android:label="Truck Sharing"></activity>
     </application>
 
 </manifest>

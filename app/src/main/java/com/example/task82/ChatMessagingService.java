@@ -26,6 +26,10 @@ import com.google.firebase.messaging.RemoteMessage;
 
 public class ChatMessagingService extends FirebaseMessagingService {
 
+    /**
+     * listener for new device token
+     * @param s new token
+     */
     @Override
     public void onNewToken(@NonNull String s) {
         super.onNewToken(s);
@@ -35,6 +39,10 @@ public class ChatMessagingService extends FirebaseMessagingService {
         Util.updateDeviceToken(this, s,loggedInUsername );
     }
 
+    /**
+     * listener for incoming new messages
+     * @param remoteMessage message/notification retrieved from firebase
+     */
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
