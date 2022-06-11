@@ -63,8 +63,8 @@ public class DeliveryGoodsActivity extends AppCompatActivity implements AdapterV
 
     // variables for good type classification with machine learning
     int imageSize = 224;
-    String[] classes = {"Chair", "Bed", "Table", "Fridge", "Computer", "Watch", "Dish", "Bread", "Pizza",
-            "Chips", "Vegetables", "Rice", "Nuts", "Metal", "Timber", "Coal", "Dirt"};
+    String[] classes = {"Sushi", "Pizza", "Gold", "Timber", "Vegetables", "Rice", "Brick", "Computer", "Table",
+"Chair", "Fridge", "Metal", "Watch", "Coal", "Cakes", "Chips", "Nuts", "Television", "Cupboards", "Pen"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
