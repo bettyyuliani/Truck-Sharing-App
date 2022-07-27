@@ -38,8 +38,8 @@ import java.util.Map;
 public class Util {
 
     // firebase server key and sender id
-    public static final String FIREBASE_KEY = "AAAA7HBdqgA:APA91bHyT6oL3rJ4iLRBSy9c9UVl019E8-Ww4zrFZhdzC5C-5SiMvxV_N_Flhb7GA7zSkWfPZpvUsdVCoDoImQB1u3qSV7yFIu4fJCXmNwUfChy8WRugCPeo_R7-75yI6JXZD_3K1Wn8";
-    private static final String SENDER_ID = "1015497468416";
+    public static final String FIREBASE_KEY = "firebase_key"
+    private static final String SENDER_ID = "sender_id";
 
     // request code
     public static final int PICK_LOCATION_REQUEST = 200;
@@ -61,7 +61,7 @@ public class Util {
     public static final String MESSAGES = "messages";
 
     // map api key
-    public static final String API_KEY = "AIzaSyDg3rrIKggl9CmPicsSMJGlX-814PSsdg8";
+    public static final String API_KEY = "api_key";
     public static final String LOCATION_LATITUDE = "location_latitude";
     public static final String LOCATION_LONGITUDE = "location_longitude";
     public static final String DESTINATION_LATITUDE = "destination_latitude";
